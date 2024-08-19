@@ -7,7 +7,7 @@ name = input("What's your name? ")
 name = name.strip().title()
 
 #implement these functions right into the input
-name = input("What's your name? ").strip().title()
+name = input("What's your name? ").lower()
 
 #split user's name into first name and last name
 first, last = name.split(" ")
