@@ -16,10 +16,25 @@ def main():
         print("It's dinner!")
 
 def convert(time):
-    index = time.find(":")
-    if(index != -1):
-        hour, minute = time.split(":")
-        time = float(hour)+ round((float(minute)/60),2)
-        return round(float(time),2)
-    return float(time)
+    hour, minute =time.split(":")
+    if("am" in time or "pm" in time):
+        grab=time[-2:]
+        hour = float(hour)
+        minute = float(minute[:-2])
+        return usePmAm(hour,grab,minute)
+    time = float(hour)+ round((float(minute)/60),2)
+    return round(float(time),2)
+
+def isIt(hour, grab):
+     if("am" in grab and hour == 12.0):
+         return 24
+     elif("pm" in grab and hour == 12.0):
+         return 12
+     return hour
+
+def usePmAm(hour, grab, minute):
+    if("pm" in grab and hour != 12):
+        return isIt(hour)  + 12 + ((minute/60))
+    print(isIt(hour,grab)+float(minute/60))
+    return float(round(isIt(hour,grab)+((minute/60))))
 main()
